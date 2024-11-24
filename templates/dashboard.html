@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection Dashboard</title>
+    <style>
+        #video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #video {
+            width: 100%;
+            height: auto;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .controls button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Detection Dashboard</h1>
+    <div id="video-container">
+        <img id="video" src="{{ url_for('video_feed') }}">
+    </div>
+    <div class="controls">
+        <button onclick="setMode('face_detection')">Face Detection</button>
+        <button onclick="setMode('ar_overlay')">AR Overlay</button>
+        <button onclick="setMode('save_faces')">Save Faces</button>
+        <button onclick="setMode('deep_learning_detection')">Deep Learning Detection</button>
+    </div>
+    <div class="controls">
+        <button onclick="setFilter('prev')">Previous Filter</button>
+        <button onclick="setFilter('next')">Next Filter</button>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            fetch(`/set_mode/${mode}`);
+        }
+
+        function setFilter(direction) {
+            fetch(`/set_filter/${direction}`);
+        }
+    </script>
+</body>
+</html>
